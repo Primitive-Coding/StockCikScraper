@@ -203,11 +203,12 @@ class StockCik:
         df = pd.read_csv(self.cik_file, sep="|")
         df = self._formate_cik_df(df)
         df.set_index("Ticker", inplace=True)
+        df["SIC"] = df["SIC"].astype(str)
         print(f"{df}")
+        return df
 
 
 if __name__ == "__main__":
     ticker = "AMZN"
     s = StockCik()
-    s.get_cik(ticker)
-    s._view_data()
+    cik = s.get_cik(ticker)
